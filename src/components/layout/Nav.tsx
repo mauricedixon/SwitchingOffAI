@@ -37,10 +37,7 @@ export default function Nav({ rec, onStart, onStop }: NavProps) {
       <div className="flex-1 flex flex-col items-center gap-0.5">
         <div 
           className={`w-[52px] h-[52px] rounded-full bg-[var(--acc)] flex items-center justify-center -mt-5 mb-0.5 text-[21px] cursor-pointer shadow-[0_4px_22px_var(--glow)] transition-all duration-200 ${rec ? 'bg-red-500 animate-pulse shadow-[0_4px_40px_rgba(239,68,68,0.9)]' : ''}`}
-          onMouseDown={onStart}
-          onMouseUp={onStop}
-          onTouchStart={(e) => { e.preventDefault(); onStart(); }}
-          onTouchEnd={(e) => { e.preventDefault(); onStop(); }}
+          onClick={rec ? onStop : onStart}
         >
           {rec ? "🔴" : "🎙️"}
         </div>

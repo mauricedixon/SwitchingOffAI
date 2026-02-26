@@ -90,13 +90,10 @@ export default function ChillDashboard({ onRec, onRel, rec }: any) {
           </div>
           <div 
             className="w-full p-3 rounded-xl bg-[var(--surf)] border border-dashed border-[var(--bord)] text-[13px] text-[var(--t3)] cursor-pointer flex items-center justify-center gap-2 transition-all duration-200"
-            onMouseDown={onRec} 
-            onMouseUp={onRel} 
-            onTouchStart={(e) => { e.preventDefault(); onRec(); }} 
-            onTouchEnd={(e) => { e.preventDefault(); onRel(); }}
+            onClick={rec ? onRel : onRec}
           >
             <span className="text-[19px]">{rec ? "🔴" : "🎙️"}</span>
-            <span>{rec ? "Release to capture…" : "Hold to capture quick thought"}</span>
+            <span>{rec ? "Tap to stop capturing…" : "Tap to capture quick thought"}</span>
           </div>
         </div>
       </div>

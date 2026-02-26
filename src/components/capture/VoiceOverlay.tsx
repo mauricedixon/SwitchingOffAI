@@ -1,6 +1,6 @@
 "use client";
 
-export default function VoiceOverlay({ isOpen, phase, text, resp, onClose }: any) {
+export default function VoiceOverlay({ isOpen, phase, text, resp, onClose, onStop }: any) {
   if (!isOpen) return null;
 
   return (
@@ -13,11 +13,14 @@ export default function VoiceOverlay({ isOpen, phase, text, resp, onClose }: any
       </button>
       
       <div className="flex flex-col items-center mb-6">
-        <div className={`w-[94px] h-[94px] rounded-full bg-[var(--acc)] flex items-center justify-center text-[38px] shadow-[0_0_40px_var(--glow)] transition-all ${phase === 'recording' ? 'animate-pulse scale-105' : ''} ${phase === 'processing' ? 'animate-spin bg-gradient-to-tr from-[var(--acc)] to-[var(--teal)]' : ''}`}>
-          {phase === "processing" ? "⚙️" : "🎙️"}
+        <div 
+          className={`w-[94px] h-[94px] rounded-full bg-[var(--acc)] flex items-center justify-center text-[38px] shadow-[0_0_40px_var(--glow)] transition-all cursor-pointer ${phase === 'recording' ? 'animate-pulse scale-105 bg-red-500' : ''} ${phase === 'processing' ? 'animate-spin bg-gradient-to-tr from-[var(--acc)] to-[var(--teal)]' : ''}`}
+          onClick={phase === "recording" ? onStop : undefined}
+        >
+          {phase === "processing" ? "⚙️" : phase === "recording" ? "🔴" : "🎙️"}
         </div>
         <div className="font-['Bricolage_Grotesque'] text-[11px] font-bold tracking-[0.12em] uppercase text-[var(--acc)] mt-4">
-          {phase === "recording" ? "Listening…" : phase === "processing" ? "Processing…" : phase === "response" ? "Done ✓" : "Ready"}
+          {phase === "recording" ? "Listening… (Tap to stop)" : phase === "processing" ? "Processing…" : phase === "response" ? "Done ✓" : "Ready"}
         </div>
       </div>
       
@@ -34,7 +37,7 @@ export default function VoiceOverlay({ isOpen, phase, text, resp, onClose }: any
         </div>
       ) : (
         <div className="text-[12px] text-[var(--t3)] text-center mt-3">
-          Hold 🎙️ to speak · cycles through demo commands each press
+          Tap the big red circle to stop recording.
         </div>
       )}
     </div>

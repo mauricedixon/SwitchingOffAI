@@ -54,6 +54,10 @@ Example commands:
 - "Move Acme deal to Negotiation" -> {"resp": "Done — Acme moved to Negotiation stage.", "fx": "moveAcme"}
 - "I'm done for today" -> {"resp": "Initiating your end-of-day handoff...", "fx": "endDay"}
 - "What's my morning briefing" -> {"resp": "Good morning. 3 priorities today...", "fx": null}
+- "Add a task to call Marcus tomorrow" -> {"resp": "Task added to call Marcus.", "fx": "createTask", "data": {"title": "Call Marcus", "priority": "P2", "due": "Tomorrow", "contact": "Marcus Chen"}}
+- "Hello, we have a meeting due in just a couple hours" -> {"resp": "Got it! I've added a task to prepare for your meeting today.", "fx": "createTask", "data": {"title": "Prepare for meeting", "priority": "P1", "due": "Today"}}
+- "Remind me to send the proposal to Summit Media next week" -> {"resp": "I've added a task to send the proposal to Summit Media next week.", "fx": "createTask", "data": {"title": "Send proposal to Summit Media", "priority": "P2", "due": "Next week", "dealId": "d4"}}
+- "Log a note that David loved the pilot" -> {"resp": "Note logged.", "fx": "logNote", "data": {"contactId": "c5", "note": "Loved the pilot"}}
 `,
         },
         {

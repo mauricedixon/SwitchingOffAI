@@ -77,7 +77,9 @@ export default function Page() {
             body: formData,
           });
 
-          if (!response.ok) throw new Error("Failed to process audio");
+          if (!response.ok) {
+            throw new Error(`API returned ${response.status}`);
+          }
 
           const data = await response.json();
           
@@ -100,8 +102,12 @@ export default function Page() {
               dealId: data.data?.dealId || null,
               src: "voice"
             };
-            setTasks((p: any) => [newTask, ...p]);
-            notify("Task Created ✓");
+            setTasks((p: any) => {
+              const updatedTasks = [newTask, ...p];
+              // Small timeout to allow the tasks to update before notifying
+              setTimeout(() => notify("Task Created ✓"), 100);
+              return updatedTasks;
+            });
           } else if (data.fx === "updateDeal") {
              const stageMapping: Record<string, number> = { "lead": 0, "outreach": 1, "proposal": 2, "negotiation": 3, "decision": 4, "won": 5, "lost": 6 };
              const s = data.data?.stage?.toLowerCase();
@@ -122,7 +128,8 @@ export default function Page() {
           }
           
         } catch (error) {
-          console.error(error);
+          // In Next.js dev, console.error shows a blocking overlay. 
+          // We'll just update the UI gracefully instead.
           setVText("Error processing voice command.");
           setVPhase("response");
           setVResp("Sorry, I ran into an issue.");
@@ -197,7 +204,7 @@ export default function Page() {
         </>
       )}
 
-      <VoiceOverlay isOpen={voiceOpen} phase={vPhase} text={vText} resp={vResp} onClose={closeVoice} />
+      <VoiceOverlay isOpen={voiceOpen} phase={vPhase} text={vText} resp={vResp} onClose={closeVoice} onStop={stopVoice} />
       
       <PermissionToStopCard 
         show={showPTS} 
@@ -220,11 +227,26 @@ export default function Page() {
       </div>
       
       <div className={`absolute bottom-0 left-0 right-0 z-[150] bg-[var(--bg2)] rounded-t-[22px] p-4 pb-10 border-t border-[var(--bord)] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${taskSheet ? 'translate-y-0' : 'translate-y-full'}`}>
-        {taskSheet && <TaskSheet task={taskSheet} onClose={() => setTaskSheet(null)} onComplete={completeTask} onSt={(id: string, s: string) => {
-          setTasks(p => p.map(t => t.id === id ? { ...t, status: s } : t));
-          setTaskSheet(null);
-          notify("Status updated");
-        }} />}
+        {taskSheet && <TaskSheet 
+          task={taskSheet} 
+          onClose={() => setTaskSheet(null)} 
+          onComplete={completeTask} 
+          onSt={(id: string, s: string) => {
+            setTasks(p => p.map(t => t.id === id ? { ...t, status: s } : t));
+            setTaskSheet(null);
+            notify("Status updated");
+          }} 
+          onEdit={(id: string, newTitle: string) => {
+            setTasks(p => p.map(t => t.id === id ? { ...t, title: newTitle } : t));
+            setTaskSheet(null);
+            notify("Task updated");
+          }}
+          onDelete={(id: string) => {
+            setTasks(p => p.filter(t => t.id !== id));
+            setTaskSheet(null);
+            notify("Task deleted");
+          }}
+        />}
       </div>
     </DynamicTheme>
   );
