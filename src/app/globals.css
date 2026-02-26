@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #080F18;
+  --color-bg2: #0D1620;
+  --color-bg3: #121D2A;
+  --color-surf: #162030;
+  --color-bord: #1E2F42;
+  --color-t1: #F0F4FF;
+  --color-t2: #8FA8C4;
+  --color-t3: #4A6882;
+  --color-acc: #6C5FFF;
+  --color-acc2: #9B90FF;
+  --color-teal: #0D8A89;
+  --color-gold: #C9851A;
+  --color-nav: #0D1620;
+  --color-glow: rgba(108,95,255,0.35);
+}
+
+@layer base {
+  :root {
+    --bg: #080F18;
+    --bg2: #0D1620;
+    --bg3: #121D2A;
+    --surf: #162030;
+    --bord: #1E2F42;
+    --t1: #F0F4FF;
+    --t2: #8FA8C4;
+    --t3: #4A6882;
+    --acc: #6C5FFF;
+    --acc2: #9B90FF;
+    --teal: #0D8A89;
+    --gold: #C9851A;
+    --nav: #0D1620;
+    --glow: rgba(108,95,255,0.35);
+  }
+
+  .chill-mode {
+    --bg: #F9F6EF;
+    --bg2: #F0EDE5;
+    --bg3: #E8E3D8;
+    --surf: #FFFFFF;
+    --bord: #DDD8CE;
+    --t1: #2A2018;
+    --t2: #6B5C47;
+    --t3: #A09080;
+    --acc: #8B7355;
+    --acc2: #C8A882;
+    --teal: #5A967F;
+    --gold: #C9952A;
+    --nav: #EDE8DF;
+    --glow: rgba(139,115,85,0.2);
+  }
+
+  body {
+    background-color: #030608;
+    color: var(--t1);
+    font-family: 'Instrument Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}

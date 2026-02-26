@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+ import { useState, useEffect, useRef, useCallback } from "react";
 
 const STAGES = ["Lead","Outreach","Proposal","Negotiation","Decision","Won","Lost"];
 const STAGE_COLORS = ["#7C6FFF","#0E9B9A","#E09B22","#2EAA6A","#D94F3A","#22C87A","#888"];
