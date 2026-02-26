@@ -1,0 +1,141 @@
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════
+   WORK MODE (default)
+   ══════════════════════════════════════════════ */
+:root {
+  --bg: #0D1B2A;
+  --bg2: #111F30;
+  --bg3: #162437;
+  --surface: #1A2840;
+  --surface2: #1F3050;
+  --border: #243349;
+  --border2: #2D3F56;
+  --text1: #FFFFFF;
+  --text2: #A8BDD0;
+  --text3: #5A7A96;
+  --accent: #6C63FF;
+  --accent2: #9B92FF;
+  --teal: #0E7C7B;
+  --gold: #C9851A;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --nav-bg: #111F30;
+  --mode-glow: rgba(108, 99, 255, 0.3);
+}
+
+/* ══════════════════════════════════════════════
+   CHILL MODE
+   ══════════════════════════════════════════════ */
+[data-mode="chill"] {
+  --bg: #FAF8F3;
+  --bg2: #F0EDE6;
+  --bg3: #E8E3DA;
+  --surface: #FFFFFF;
+  --surface2: #F5F2EC;
+  --border: #DDD9D0;
+  --border2: #CCC8BF;
+  --text1: #2C2416;
+  --text2: #6B5F4A;
+  --text3: #9C8E79;
+  --accent: #7A6E5E;
+  --accent2: #9B8C7A;
+  --teal: #5A9E8F;
+  --gold: #C9A35A;
+  --success: #4A9E6F;
+  --warning: #C9851A;
+  --danger: #C0392B;
+  --nav-bg: #EDE9E1;
+  --mode-glow: rgba(122, 110, 94, 0.2);
+}
+
+/* ── Base ── */
+body {
+  background: var(--bg);
+  color: var(--text1);
+  font-family: 'DM Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 700ms ease, color 700ms ease;
+}
+
+* {
+  box-sizing: border-box;
+  transition: background-color 700ms ease, color 700ms ease, border-color 700ms ease;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes orbPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.5); transform: scale(1); }
+  50% { box-shadow: 0 0 30px 10px rgba(108, 99, 255, 0.3); transform: scale(1.05); }
+}
+
+@keyframes stalledPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes completionPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ── Utility Classes ── */
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-mono {
+  font-family: 'DM Mono', monospace;
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top, 14px);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 24px);
+}
+
+/* ── Scrollbar hiding ── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
